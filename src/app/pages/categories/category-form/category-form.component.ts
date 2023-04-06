@@ -65,7 +65,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   private buildCategoryForm() {
     this.categoryForm = this.formBuilder.group({
       id: [null],
-      name: [null, Validators.required, Validators.minLength(2)],
+      name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null]
     });
   }
@@ -109,8 +109,10 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
 
     const category: Category = Object.assign(new Category(), this.categoryForm.value);
 
-    this.categoryService.update(category).subscribe(
-      category => this.actionsForSuccess(category),
+    this.category = category;
+
+    this.categoryService.update(this.category).subscribe(
+      category => this.actionsForSuccess(this.category),
       error => this.actionsForError(error)
     )
   }
