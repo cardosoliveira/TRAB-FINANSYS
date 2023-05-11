@@ -41,12 +41,84 @@ export class ReportsComponent implements OnInit {
   constructor(private entryService: EntryService, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.categoryService.getAll().subscribe(categories => this.categories = this.categories);
+    this.categoryService.getAll().subscribe(categories => this.categories = categories);
   }
+
 
   generatReports() {
     const month = this.month.nativeElement.value;
     const year = this.year.nativeElement.value;
+
+    if(!month || !year){
+      alert("Você precisa selecionar o Mês e o Ano para gerar os relatórios")
+    }
+    else{
+      this.entryService.getByMonthAndYear(month, year).subscribe(this.setValues.bind(this))
+    }
+  }
+
+
+  private setValues(entries: Entry[]){
+    this.entries = entries;
+    this.calculateBalance();
+    this.setChartData();
+  }
+
+
+  private calculateBalance(){
+    let expenseTotal = 0;
+    let revenueTotal = 0;
+
+    this.entries.forEach(entry => {
+      if(entry.type == "revenue"){
+        revenueTotal += currencyFormater.unformat(entry.amount, { code: "BRL"})
+      }
+      else {
+        expenseTotal += currencyFormater.unformat(entry.amount, { code: "BRL"})
+      }
+    })
+
+    this.expenseTotal = currencyFormater.format(expenseTotal, { code: "BRL"})
+    this.revenueTotal = currencyFormater.format(revenueTotal, { code: "BRL"})
+
+    this.balance = currencyFormater.format(revenueTotal - expenseTotal, { code: "BRL"})
+  }
+
+
+  private setChartData(){
+    this.revenueChartData = this.getChartData('revenue', 'Gráfico de Receitas', '#9CCC65')
+    this.expenseChartData = this.getChartData('expense', 'Gráfico de Depesas', '#E03131')
+  }
+
+
+  private getChartData(entryType: string, title: string, color: string){
+    const chartData = [];
+
+    this.categories.forEach(category => {
+      const filteredEntries = this.entries.filter(
+        entry => (entry.categoryId == category.id) && (entry.type == entryType)
+      )
+
+      if(filteredEntries.length > 0) {
+        const totalAmount = filteredEntries.reduce(
+          (total, entry) => total + currencyFormater.unformat(entry.amount, { code: "BRL"}), 0
+        )
+
+        chartData.push({
+          categoryName: category.name,
+          totalAmount: totalAmount
+        })
+      }
+    })
+
+     return {
+      labels: chartData.map(item => item.categoryName),
+      datasets: [{
+        label: title,
+        backgroundColor: color,
+        data: chartData.map(item => item.totalAmount)
+      }]
+    }
   }
 
 }

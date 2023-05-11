@@ -10,7 +10,7 @@ export class Entry extends BaseResourceModel {
      public amount?: string,
      public date?: string,
      public paid?: boolean,
-     public category_id?: number,
+     public categoryId?: number,
      public category?: Category,
     ){
         super();
