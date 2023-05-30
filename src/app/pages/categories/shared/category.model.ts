@@ -3,7 +3,8 @@ export class Category extends BaseResourceModel {
     constructor(
         public id?:number,
         public name?: string,
-        public description?: string
+        public description?: string,
+        public userId?: number, // Adiciona a propriedade userId
     ){
         super();
     }

@@ -14,18 +14,21 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     getAll(): Observable<T[]> {
-        return this.http.get(this.apiPath).pipe(
-          catchError(this.handleError),
-          map(this.jsonDataToResources)
-        )
-      }
+      const userId = localStorage.getItem('userId'); // Obtém o userId do Local Storage
+      const url = `${this.apiPath}?userId=${userId}`;
+      return this.http.get(url).pipe(
+        catchError(this.handleError),
+        map(this.jsonDataToResources)
+      );
+    }
     
       getById(id: number): Observable<T> {
-        const url = `${this.apiPath}/${id}`;
+        const userId = localStorage.getItem('userId'); // Obtém o userId do Local Storage
+        const url = `${this.apiPath}/${id}?userId=${userId}`;
         return this.http.get(url).pipe(
           catchError(this.handleError),
           map(this.jsonDataToResource)
-        )
+        );
       }
     
       create(resource: T): Observable<T> {
@@ -36,19 +39,21 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
       }
     
       update(resource: T): Observable<T> {
-        const url = `${this.apiPath}/${resource.id}`;
+        const userId = localStorage.getItem('userId'); // Obtém o userId do Local Storage
+        const url = `${this.apiPath}/${resource.id}?userId=${userId}`;
         return this.http.put(url, resource).pipe(
           catchError(this.handleError),
           map(this.jsonDataToResource)
-        )
+        );
       }
     
       delete(id: number): Observable<any> {
-        const url = `${this.apiPath}/${id}`;
+        const userId = localStorage.getItem('userId'); // Obtém o userId do Local Storage
+        const url = `${this.apiPath}/${id}?userId=${userId}`;
         return this.http.delete(url).pipe(
           catchError(this.handleError),
           map(() => null)
-        )
+        );
       }
 
         // PROTECTED METHODS

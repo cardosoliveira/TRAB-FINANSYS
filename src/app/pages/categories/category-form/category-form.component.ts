@@ -96,9 +96,9 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private createCategory(){
-
+    const userId = localStorage.getItem('userId');
     const category: Category = Object.assign(new Category(), this.categoryForm.value);
-
+    category.userId = Number(userId);
     this.categoryService.create(category).subscribe(
       category => this.actionsForSuccess(category),
       error => this.actionsForError(error)
@@ -106,9 +106,9 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private updateCategory(){
-
+    const userId = localStorage.getItem('userId');
     const category: Category = Object.assign(new Category(), this.categoryForm.value);
-
+    category.userId = Number(userId);
     this.category = category;
 
     this.categoryService.update(this.category).subscribe(
