@@ -3,14 +3,14 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
-import { Login } from './login.model'; 
+import { Login } from './login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService{
 
-private apiPath = 'http://localhost:8080/v1/logar'
+private apiPath = 'http://localhost:8080/v1/user/login'
 
 constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ constructor(private http: HttpClient) {}
     return this.http.post<number>(this.apiPath, user).pipe(
       catchError(this.handleError),
       map((response: any) => {
-        const userId = response.id;
+        const userId = response;
         return userId;
       })
     );

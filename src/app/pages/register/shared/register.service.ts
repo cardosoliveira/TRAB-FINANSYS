@@ -3,14 +3,14 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
-import { User } from './user.model'; 
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService{
 
-private apiPath = 'http://localhost:8080/v1/cadastrar'
+private apiPath = 'http://localhost:8080/v1/user'
 
 constructor(private http: HttpClient) {}
 
