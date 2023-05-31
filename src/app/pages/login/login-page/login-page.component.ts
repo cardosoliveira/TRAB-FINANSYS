@@ -11,26 +11,21 @@ import { Login } from '../shared/login.model';
 export class LoginPageComponent {
 
   hideHeader: boolean;
-  @ViewChild('email') email: ElementRef = null;
+  @ViewChild('username') username: ElementRef = null;
   @ViewChild('password') password: ElementRef = null;
 
   constructor(private router: Router, private loginService: LoginService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.hideHeader = this.router.url !== '/login';
-      }
-    });
   }
 
   logar() {
-    const email = this.email.nativeElement.value;
+    const username = this.username.nativeElement.value;
     const password = this.password.nativeElement.value;
   
-    if (!email || !password) {
+    if (!username || !password) {
       alert("Você precisa colocar seu email e senha para acessar o sistema");  
     } else {
       const user: Login = {
-        email: email,
+        userName: username,
         password: password
       };
   

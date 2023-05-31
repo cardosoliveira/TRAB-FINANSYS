@@ -1,0 +1,63 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-info mb-4">
+  <a class="navbar-brand text-white">Bem-vindo ao FINANSYS</a>
+
+  <ul class="navbar-nav ml-auto"> <!-- Adicione esta lista para alinhar o botão à direita -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="">Fechar</a> <!-- Redireciona para /login -->
+    </li>
+  </ul>
+</nav>
+
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Cadastrar Novo Usuário
+    </h1>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Preencha as informações corretamente para criar uma conta no sistema.
+  </div>
+
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="year">Nome</label>
+        <input #fullName name="fullName" type="fullName" class="form-control" id="fullName" formControlName="fullName">
+      </div> 
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="year">E-mail</label>
+        <input #email name="email" type="email" class="form-control" id="email" formControlName="email">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="year">Login</label>
+        <input #userName name="userName" type="userName" class="form-control" id="userName" formControlName="userName">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="year">Senha</label>
+        <input #password name="email" type="password" class="form-control" id="password" formControlName="password">
+      </div>
+    </div>
+
+    <div class="form-row">
+
+      <div class="col-md text-right">
+        <button type="button" (click)="logar()" class="btn btn-primary">
+          Cadastrar Usuário
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
