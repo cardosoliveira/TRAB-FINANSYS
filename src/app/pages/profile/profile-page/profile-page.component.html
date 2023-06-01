@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info mb-4">
+  <a class="navbar-brand">FINANSYS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/reports">Relatórios</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/entries">Lançamentos</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/categories">Categorias</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/profile">Perfil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="">Deslogar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Alterar informações do Usuário
+    </h1>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Altere as informações do seu usuário com os campos abaixo.
+  </div>
+
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="fullName">Nome</label>
+        <input #fullName name="fullName" type="text" class="form-control" id="fullName" formControlName="fullName">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="email">E-mail</label>
+        <input #email name="email" type="email" class="form-control" id="email" formControlName="email">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="userName">Login</label>
+        <input #userName name="userName" type="text" class="form-control" id="userName" formControlName="userName" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="password">Senha</label>
+        <input #password name="password" type="password" class="form-control" id="password" formControlName="password">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md text-right">
+        <button type="button" (click)="criarUsuario()" class="btn btn-primary">
+          Alterar informações
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
