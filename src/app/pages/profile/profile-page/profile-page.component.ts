@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
 
   user: User = new User();
 
-  constructor(   
+  constructor(
     private profileService: ProfileService,
   ) { }
 
@@ -44,7 +44,8 @@ export class ProfilePageComponent implements OnInit {
       fullName: this.fullName.nativeElement.value,
       email: this.email.nativeElement.value,
       userName: this.userName.nativeElement.value,
-      password: this.password.nativeElement.value
+      password: this.password.nativeElement.value,
+      id: Number(userId)
     };
 
     this.profileService.updateUser(+userId, updatedUser).subscribe(
