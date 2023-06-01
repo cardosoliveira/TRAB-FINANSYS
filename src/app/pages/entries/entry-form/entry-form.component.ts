@@ -145,9 +145,9 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private createEntry(){
-
+    const userId = localStorage.getItem('userId');
     const entry: Entry = Object.assign(new Entry(), this.entryForm.value);
-
+    entry.userId = Number(userId);
     this.entryService.create(entry).subscribe(
       entry => this.actionsForSuccess(entry),
       error => this.actionsForError(error)
